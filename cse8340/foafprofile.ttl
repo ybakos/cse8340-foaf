@@ -1,0 +1,28 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/spec/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix film: <http://data.linkedmdb.org/page/movie/film/> .
+@prefix actor: <http://data.linkedmdb.org/resource/actor/> .
+
+:yongb rdf:type foaf:Person .
+:yongb foaf:familyName "Bakos" .
+:yongb foaf:givenName "Yong" .
+
+:z rdf:type foaf:Person .
+
+:yongb foaf:knows :z .
+
+:jimi rdf:type foaf:Person .
+:yongb :admire :jimi .
+
+_:x rdf:type frbr:Work .
+_:x dc:creator :jimi .
+_:x dc:title "Castles Made of Sand" .
+
+:yongb :likes film:390 .
+film:390 dc:title "Bill & Ted's Excellent Adventure"
+actor:29536 rdf:type foaf:Person .
+actor:29536 foaf:familyName "Reeves" .
+actor:29536 foaf:givenName "Keanu" .
+
