@@ -4,7 +4,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix film: <http://data.linkedmdb.org/page/movie/film/> .
 @prefix actor: <http://data.linkedmdb.org/resource/actor/> .
-@prefix : <http://lyle.smu.edu/cse8340#>
+@prefix : <http://lyle.smu.edu/cse8340#> .
 
 :yongb rdf:type foaf:Person .
 :yongb foaf:familyName "Bakos" .
@@ -22,7 +22,7 @@ _:x dc:creator :jimi .
 _:x dc:title "Castles Made of Sand" .
 
 :yongb :likes film:390 .
-film:390 dc:title "Bill & Ted's Excellent Adventure"
+film:390 dc:title "Bill & Ted's Excellent Adventure" .
 actor:29536 rdf:type foaf:Person .
 actor:29536 foaf:familyName "Reeves" .
 actor:29536 foaf:givenName "Keanu" .
