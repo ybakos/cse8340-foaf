@@ -4,6 +4,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix film: <http://data.linkedmdb.org/page/movie/film/> .
 @prefix actor: <http://data.linkedmdb.org/resource/actor/> .
+@prefix : <http://lyle.smu.edu/cse8340#>
 
 :yongb rdf:type foaf:Person .
 :yongb foaf:familyName "Bakos" .
