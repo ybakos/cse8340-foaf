@@ -1,29 +1,87 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix foaf: <http://xmlns.com/foaf/spec/> .
-@prefix frbr: <http://purl.org/vocab/frbr/core#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix film: <http://data.linkedmdb.org/page/movie/film/> .
-@prefix actor: <http://data.linkedmdb.org/resource/actor/> .
-@prefix : <http://lyle.smu.edu/cse8340#> .
+# FOAF Profile (Assignment 2)
+# Yong Joseph Bakos
 
-:yongb rdf:type foaf:Person .
-:yongb foaf:familyName "Bakos" .
-:yongb foaf:givenName "Yong" .
 
-:z rdf:type foaf:Person .
+# Commented out to pass the provided validator, which doesn't support
+# this RDF 1.1 Turtle feature.
+#BASE             <http://lyle.smu.edu/cse8340#>
+#PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+#PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+#PREFIX foaf:     <http://xmlns.com/foaf/spec/>
+#PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+#PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+#PREFIX film:     <http://data.linkedmdb.org/page/movie/film/>
+#PREFIX actor:    <http://data.linkedmdb.org/resource/actor/>
+#PREFIX rel:      <http://purl.org/vocab/relationship/>
+#PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+#PREFIX :         <#>
 
-:yongb foaf:knows :z .
 
-:jimi rdf:type foaf:Person .
-:yongb :admire :jimi .
+@base             <http://lyle.smu.edu/cse8340#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:     <http://xmlns.com/foaf/spec/> .
+@prefix frbr:     <http://purl.org/vocab/frbr/core#> .
+@prefix dc:       <http://purl.org/dc/elements/1.1/> .
+@prefix film:     <http://data.linkedmdb.org/page/movie/film/> .
+@prefix actor:    <http://data.linkedmdb.org/resource/actor/> .
+@prefix rel:      <http://purl.org/vocab/relationship/> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix :         <#> .
 
-_:x rdf:type frbr:Work .
-_:x dc:creator :jimi .
-_:x dc:title "Castles Made of Sand" .
 
-:yongb :likes film:390 .
-film:390 dc:title "Bill & Ted's Excellent Adventure" .
-actor:29536 rdf:type foaf:Person .
-actor:29536 foaf:familyName "Reeves" .
-actor:29536 foaf:givenName "Keanu" .
+<>                dc:date               "2015-06-13"^^xsd:date ;
+                  rdfs:label            "FOAF Profile" ;
+                  rdfs:comment          "A FOAF Profile with additional requirements for CSE 8340 Assignment 2." ;
+                  rdfs:seeAlso          :assignment2 .
+
+:Musician         a                     rdfs:Class ;
+                  rdfs:subClassOf       :Person .
+
+:Parent           a                     rdfs:Class ;
+                  rdfs:subClassOf       :Person ;
+                  rdfs:comment          "A person who has children." .
+
+:numberOfChildren a                     rdfs:Property ;
+                  rdfs:domain           :Parent ;
+                  rdfs:range            xsd:integer .
+
+:numberOfBoys     a                     rdfs:Property ;
+                  rdfs:subPropertyOf    :numberOfChildren .
+
+:z                a                     foaf:Person .
+
+:drc              a                     foaf:Person .
+
+:jimi             a                     :Musician ;
+                  foaf:name             "Jimi Hendrix" ;
+                  :alive                false .
+
+[]                a                     frbr:Work ;
+                  dc:creator            :jimi ;
+                  dc:title              "Castles Made of Sand" .
+
+
+film:390          dc:title              "Bill & Ted's Excellent Adventure" .
+
+actor:29536       rdf:type              foaf:Person ;
+                  foaf:familyName       "Reeves" ;
+                  foaf:givenName        "Keanu" .
+
+:yongb            a                     foaf:Person ;
+                  foaf:familyName       "Bakos" ;
+                  foaf:givenName        "Yong" ;
+                  :likes                film:390 ;
+                  rel:knowsByReputation :jimi, actor:29536 ;
+                  rel:knowsOf           :jimi, actor:29536 ;
+                  rel:wouldLikeToKnow   :jimi ;
+                  rel:influencedBy      :drc ;
+                  rel:colleagueOf       :drc ;
+                  foaf:knows            :z ;
+                  foaf:age              39 .
+
+:rich             a                     rdf:Statement ;
+                  rdf:subject           :yongb ;
+                  rdf:predicate         :income ;
+                  rdf:object            0.2 .
 
