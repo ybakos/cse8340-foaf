@@ -1,4 +1,4 @@
-# FOAF Profile (Assignment 2)
+# FOAF Profile (Assignment 3)
 # Yong Joseph Bakos
 
 
@@ -14,6 +14,7 @@
 #PREFIX actor:    <http://data.linkedmdb.org/resource/actor/>
 #PREFIX rel:      <http://purl.org/vocab/relationship/>
 #PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+#PREFIX owl:      <http://www.w3.org/2002/07/owl#>
 #PREFIX :         <#>
 
 
@@ -27,20 +28,23 @@
 @prefix actor:    <http://data.linkedmdb.org/resource/actor/> .
 @prefix rel:      <http://purl.org/vocab/relationship/> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
 @prefix :         <#> .
 
 
 <>                dc:date               "2015-06-13"^^xsd:date ;
                   rdfs:label            "FOAF Profile" ;
-                  rdfs:comment          "A FOAF Profile with additional requirements for CSE 8340 Assignment 2." ;
-                  rdfs:seeAlso          :assignment2 .
+                  rdfs:comment          "A FOAF Profile with additional requirements for CSE 8340 Assignment 3." ;
+                  rdfs:seeAlso          :assignment3 .
 
 :Musician         a                     rdfs:Class ;
-                  rdfs:subClassOf       :Person .
+                  rdfs:subClassOf       foaf:Person .
 
 :Parent           a                     rdfs:Class ;
-                  rdfs:subClassOf       :Person ;
+                  rdfs:subClassOf       foaf:Person ;
                   rdfs:comment          "A person who has children." .
+
+:Child            owl:inverseOf         :Parent .
 
 :numberOfChildren a                     rdfs:Property ;
                   rdfs:domain           :Parent ;
@@ -57,12 +61,17 @@
                   foaf:name             "Jimi Hendrix" ;
                   :alive                false .
 
+:johnnyHendrix    a                     foaf:Person ;
+                  foaf:name             "Johnny Allen Hendrix" ;
+                  owl:sameAs            :jimi .
+
 []                a                     frbr:Work ;
                   dc:creator            :jimi ;
                   dc:title              "Castles Made of Sand" .
 
 
-film:390          dc:title              "Bill & Ted's Excellent Adventure" .
+:billAndTed       dc:title              "Bill & Ted's Excellent Adventure" ;
+                  owl:sameAs            film:390 .
 
 actor:29536       rdf:type              foaf:Person ;
                   foaf:familyName       "Reeves" ;
@@ -71,7 +80,7 @@ actor:29536       rdf:type              foaf:Person ;
 :yongb            a                     foaf:Person ;
                   foaf:familyName       "Bakos" ;
                   foaf:givenName        "Yong" ;
-                  :likes                film:390 ;
+                  :likes                :billAndTed ;
                   rel:knowsByReputation :jimi, actor:29536 ;
                   rel:knowsOf           :jimi, actor:29536 ;
                   rel:wouldLikeToKnow   :jimi ;
@@ -81,7 +90,12 @@ actor:29536       rdf:type              foaf:Person ;
                   foaf:age              39 .
 
 :rich             a                     rdf:Statement ;
-                  rdf:subject           :yongb ;
+                  rdf:subject           foaf:Person ;
                   rdf:predicate         :income ;
                   rdf:object            0.2 .
 
+foaf:knows        a                     owl:SymmetricProperty .
+rel:colleagueOf   a                     owl:SymmetricProperty .
+rel:influencedBy  a                     owl:TransitiveProperty .
+rel:knowsByReputation owl:equivalentProperty rel:knowsOf .
+foaf:age          a                     owl:FunctionalProperty .

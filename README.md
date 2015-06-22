@@ -1,4 +1,4 @@
-# CSE 8340 Assignments 1 & 2
+# CSE 8340 Assignments 1, 2 & 3
 
 ### FOAF Profile
 An example of a FOAF profile using the RDF Turtle syntax.
