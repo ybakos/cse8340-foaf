@@ -1,4 +1,4 @@
-# FOAF Profile (Assignment 3)
+# FOAF Profile (Assignment 4)
 # Yong Joseph Bakos
 
 
@@ -15,6 +15,7 @@
 #PREFIX rel:      <http://purl.org/vocab/relationship/>
 #PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
 #PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+#PREFIX dbpedia:  <http://dbpedia.org/ontology#>
 #PREFIX :         <#>
 
 
@@ -29,13 +30,15 @@
 @prefix rel:      <http://purl.org/vocab/relationship/> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix dbpedia:  <http://dbpedia.org/ontology#> .
+
 @prefix :         <#> .
 
 
-<>                dc:date               "2015-06-13"^^xsd:date ;
-                  rdfs:label            "FOAF Profile" ;
-                  rdfs:comment          "A FOAF Profile with additional requirements for CSE 8340 Assignment 3." ;
-                  rdfs:seeAlso          :assignment3 .
+<>                dc:date               "2015-06-01"^^xsd:date ;
+                  rdfs:label            "CSE 8340" ;
+                  rdfs:comment          "CSE 8340 Advanced Topics in Software Engineering" ;
+                  rdfs:seeAlso          :semanticWeb .
 
 :Musician         a                     rdfs:Class ;
                   rdfs:subClassOf       foaf:Person .
@@ -44,7 +47,13 @@
                   rdfs:subClassOf       foaf:Person ;
                   rdfs:comment          "A person who has children." .
 
-:Child            owl:inverseOf         :Parent .
+:isParentOf       a                     rdfs:Property ;
+                  rdfs:domain           :Parent .
+
+:isChildOf        a                     rdfs:Property ;
+                  rdfs:domain           :Child .
+
+:isParentOf       owl:inverseOf         :isChildOf .
 
 :numberOfChildren a                     rdfs:Property ;
                   rdfs:domain           :Parent ;
@@ -89,8 +98,8 @@ actor:29536       rdf:type              foaf:Person ;
                   foaf:knows            :z ;
                   foaf:age              39 .
 
-:rich             a                     rdf:Statement ;
-                  rdf:subject           foaf:Person ;
+:broke            a                     rdf:Statement ;
+                  rdf:subject           :yongb ;
                   rdf:predicate         :income ;
                   rdf:object            0.2 .
 
@@ -98,4 +107,4 @@ foaf:knows        a                     owl:SymmetricProperty .
 rel:colleagueOf   a                     owl:SymmetricProperty .
 rel:influencedBy  a                     owl:TransitiveProperty .
 rel:knowsByReputation owl:equivalentProperty rel:knowsOf .
-foaf:age          a                     owl:FunctionalProperty .
+dbpedia:birthPlace a                     owl:FunctionalProperty .
