@@ -1,5 +1,6 @@
-# FOAF Profile (Assignment 4)
+# FOAF Data (Assignment 4)
 # Yong Joseph Bakos
+# See ./ontology.ttl for ontology.
 
 
 # Commented out to pass the provided validator, which doesn't support
@@ -40,28 +41,6 @@
                   rdfs:comment          "CSE 8340 Advanced Topics in Software Engineering" ;
                   rdfs:seeAlso          :semanticWeb .
 
-:Musician         a                     rdfs:Class ;
-                  rdfs:subClassOf       foaf:Person .
-
-:Parent           a                     rdfs:Class ;
-                  rdfs:subClassOf       foaf:Person ;
-                  rdfs:comment          "A person who has children." .
-
-:isParentOf       a                     rdfs:Property ;
-                  rdfs:domain           :Parent .
-
-:isChildOf        a                     rdfs:Property ;
-                  rdfs:domain           :Child .
-
-:isParentOf       owl:inverseOf         :isChildOf .
-
-:numberOfChildren a                     rdfs:Property ;
-                  rdfs:domain           :Parent ;
-                  rdfs:range            xsd:integer .
-
-:numberOfBoys     a                     rdfs:Property ;
-                  rdfs:subPropertyOf    :numberOfChildren .
-
 :z                a                     foaf:Person .
 
 :drc              a                     foaf:Person .
@@ -71,16 +50,14 @@
                   :alive                false .
 
 :johnnyHendrix    a                     foaf:Person ;
-                  foaf:name             "Johnny Allen Hendrix" ;
-                  owl:sameAs            :jimi .
+                  foaf:name             "Johnny Allen Hendrix" .
 
 []                a                     frbr:Work ;
                   dc:creator            :jimi ;
                   dc:title              "Castles Made of Sand" .
 
 
-:billAndTed       dc:title              "Bill & Ted's Excellent Adventure" ;
-                  owl:sameAs            film:390 .
+:billAndTed       dc:title              "Bill & Ted's Excellent Adventure" .
 
 actor:29536       rdf:type              foaf:Person ;
                   foaf:familyName       "Reeves" ;
@@ -98,13 +75,3 @@ actor:29536       rdf:type              foaf:Person ;
                   foaf:knows            :z ;
                   foaf:age              39 .
 
-:broke            a                     rdf:Statement ;
-                  rdf:subject           :yongb ;
-                  rdf:predicate         :income ;
-                  rdf:object            0.2 .
-
-foaf:knows        a                     owl:SymmetricProperty .
-rel:colleagueOf   a                     owl:SymmetricProperty .
-rel:influencedBy  a                     owl:TransitiveProperty .
-rel:knowsByReputation owl:equivalentProperty rel:knowsOf .
-dbpedia:birthPlace a                     owl:FunctionalProperty .

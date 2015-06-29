@@ -1,0 +1,73 @@
+# FOAF Ontology (Assignment 4)
+# Yong Joseph Bakos
+# See ./foafdata.ttl for data.
+
+
+# Commented out to pass the provided validator, which doesn't support
+# this RDF 1.1 Turtle feature.
+#BASE             <http://lyle.smu.edu/cse8340#>
+#PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+#PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+#PREFIX foaf:     <http://xmlns.com/foaf/spec/>
+#PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+#PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+#PREFIX film:     <http://data.linkedmdb.org/page/movie/film/>
+#PREFIX actor:    <http://data.linkedmdb.org/resource/actor/>
+#PREFIX rel:      <http://purl.org/vocab/relationship/>
+#PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+#PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+#PREFIX dbpedia:  <http://dbpedia.org/ontology#>
+#PREFIX :         <#>
+
+
+@base             <http://lyle.smu.edu/cse8340#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:     <http://xmlns.com/foaf/spec/> .
+@prefix frbr:     <http://purl.org/vocab/frbr/core#> .
+@prefix dc:       <http://purl.org/dc/elements/1.1/> .
+@prefix film:     <http://data.linkedmdb.org/page/movie/film/> .
+@prefix actor:    <http://data.linkedmdb.org/resource/actor/> .
+@prefix rel:      <http://purl.org/vocab/relationship/> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix dbpedia:  <http://dbpedia.org/ontology#> .
+
+@prefix :         <#> .
+
+:Musician         a                     rdfs:Class ;
+                  rdfs:subClassOf       foaf:Person .
+
+:Parent           a                     rdfs:Class ;
+                  rdfs:subClassOf       foaf:Person ;
+                  rdfs:comment          "A person who has children." .
+
+:isParentOf       a                     rdfs:Property ;
+                  rdfs:domain           :Parent .
+
+:isChildOf        a                     rdfs:Property ;
+                  rdfs:domain           :Child .
+
+:isParentOf       owl:inverseOf         :isChildOf .
+
+:numberOfChildren a                     rdfs:Property ;
+                  rdfs:domain           :Parent ;
+                  rdfs:range            xsd:integer .
+
+:numberOfBoys     a                     rdfs:Property ;
+                  rdfs:subPropertyOf    :numberOfChildren .
+
+:johnnyHendrix    owl:sameAs            :jimi .
+
+:billAndTed       owl:sameAs            film:390 .
+
+:broke            a                     rdf:Statement ;
+                  rdf:subject           :yongb ;
+                  rdf:predicate         :income ;
+                  rdf:object            0.2 .
+
+foaf:knows        a                     owl:SymmetricProperty .
+rel:colleagueOf   a                     owl:SymmetricProperty .
+rel:influencedBy  a                     owl:TransitiveProperty .
+rel:knowsByReputation owl:equivalentProperty rel:knowsOf .
+dbpedia:birthPlace a                     owl:FunctionalProperty .
